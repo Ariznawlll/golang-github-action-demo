@@ -3,7 +3,9 @@
 
 name: Go
 
+# 什么时候可以触发它
 on:
+  # 当修改了某些东西，并且当前分支是master分支，push的时候执行
   push:
     branches: [ "master" ]
   pull_request:
@@ -12,15 +14,20 @@ on:
 jobs:
 
   build:
+    # 当前运行环境
     runs-on: ubuntu-latest
+    # build流程中的子步骤
     steps:
+    # 检出在当前github工作空间的项目
     - uses: actions/checkout@v3
 
+    # 执行一个一系列或多行的shell命令
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
         go-version: 1.19
 
+    #
     - name: Build
       run: go build -v ./...
 
